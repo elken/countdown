@@ -1,0 +1,12 @@
+#+title: Countdown bot
+
+A mostly useless bot for Discord to create a dummy voice channel that displays the time difference for a particular event.
+
+** Usage
+*** Clojure
+Depends on [[https://clojure.org/guides/install_clojure][Clojure]] to be developed, then run with =clj -=m bot=.
+
+Edit [[file:resources/config.edn][resources/config.edn]] to use, otherwise it won't connect to anything.
+
+*** Java
+Run the uberjar in the releases. Override settings with capitalized version from [[file:resources/config.edn][resources/config.edn]] (eg =TOKEN= for =token=)
