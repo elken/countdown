@@ -19,7 +19,7 @@
         event-start   (java.time.ZonedDateTime/of (java.time.LocalDateTime/parse event-date) (java.time.ZoneId/of "Europe/London"))]
 
     (defn channel-name []
-      (let [diff          (- (.toEpochMilli event-start) (.toEpochMilli (now)))
+      (let [diff          (- (.toEpochMilli (.toInstant event-start)) (.toEpochMilli (.toInstant (now))))
             days          (quot diff 86400000)
             hours         (mod (quot diff 3600000) 24)
             mins          (mod (-> (quot diff 1000)
