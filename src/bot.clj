@@ -8,21 +8,24 @@
    [clojure.string        :as s])
   (:gen-class))
 
+(defn- now []
+  (java.time.ZonedDateTime/now (java.time.ZoneId/of "Europe/London")))
+
 (defn -main [& args]
   (let [event-ch      (a/chan 100)
         {:keys [token guild-id message-prefix event-date]} (load-config)
         connection    (c/connect-bot! token event-ch :intents #{:guilds :guild-messages})
         conn          (m/start-connection! token)
-        event-start   (java.time.Instant/parse event-date)]
+        event-start   (java.time.ZonedDateTime/of (java.time.LocalDateTime/parse event-date) (java.time.ZoneId/of "Europe/London"))]
 
     (defn channel-name []
-      (let [diff          (- (.toEpochMilli event-start) (.toEpochMilli (java.time.Instant/now)))
+      (let [diff          (- (.toEpochMilli event-start) (.toEpochMilli (now)))
             days          (quot diff 86400000)
             hours         (mod (quot diff 3600000) 24)
             mins          (mod (-> (quot diff 1000)
                                    (quot 60))
                                60)]
-        (if (.isAfter event-start (java.time.Instant/now))
+        (if (.isAfter event-start (now))
           (str message-prefix " " days "D " hours "H " mins "M")
           (str message-prefix " happening!"))))
 
@@ -57,5 +60,4 @@
       (finally
         (m/stop-connection! conn)
         (c/disconnect-bot!  connection)
-        (a/close!           event-ch))))
-  )
+        (a/close!           event-ch)))))
