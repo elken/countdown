@@ -7,4 +7,4 @@ RUN clojure -T:build uber
 FROM gcr.io/distroless/java11-debian11
 COPY --from=build-env /app /app
 WORKDIR /app
-CMD ["target/*.jar"]
+CMD ["target/countdownBot-uber.jar"]
