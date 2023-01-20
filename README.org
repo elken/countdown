@@ -4,7 +4,7 @@ A mostly useless bot for Discord to create a dummy voice channel that displays t
 
 ** Usage
 *** Clojure
-Depends on [[https://clojure.org/guides/install_clojure][Clojure]] to be developed, then run with =clj -=m bot=.
+Depends on [[https://clojure.org/guides/install_clojure][Clojure]] to be developed, then run with =clj -m bot=.
 
 Edit [[file:resources/config.edn][resources/config.edn]] to use, otherwise it won't connect to anything.
 
