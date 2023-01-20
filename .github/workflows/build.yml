@@ -35,6 +35,17 @@ jobs:
       - name: 🏗 Uberjar Build
         run: clojure -T:build build/uber
 
+      - name: Docker Login
+        uses: docker/login-action@v1.14.1
+        with:
+          registry: ghcr.io
+          username: elken
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker image push
+        run: |
+          docker push ghcr.io/elken/countdown:latest
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
