@@ -54,8 +54,9 @@
                                               :allow 0
                                               :deny (:connect p/permissions-bit)}]})))
 
-          ;; TODO This could probably do with a Thread/sleep
+          (Thread/sleep 300000)
           (when-not (= :disconnect event-type)
+            (a/go (a/into [] event-ch))
             (recur))))
       (finally
         (m/stop-connection! conn)
