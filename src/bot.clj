@@ -48,7 +48,7 @@
   (let [{:keys [event-name event-date extra-message]} event
         {:keys [days hours mins]} (time-left event-date)]
     (if (.isAfter (date->zdt event-date) (now))
-      (format "There are %d days, %d hours and %d minutes until %s!\n%s" days hours mins event-name extra-message)
+      (format "There are %d days, %d hours and %d minutes until %s!\n%s" days hours mins event-name (or extra-message ""))
       (str event-name " happening!"))))
 
 (defn- channel-starts-with? [prefix]
