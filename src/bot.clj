@@ -174,7 +174,7 @@
 
 (defn -main [& args]
   (let [{:keys [token guild-id events]} (load-config)
-        chimes (chime-ch (chime/periodic-seq (java.time.Instant/now) (java.time.Duration/ofSeconds 5))
+        chimes (chime-ch (chime/periodic-seq (java.time.Instant/now) (java.time.Duration/ofMinutes 5))
                          {:ch (a/chan (a/sliding-buffer 1))})]
 
     (log/info "Starting bot...")
